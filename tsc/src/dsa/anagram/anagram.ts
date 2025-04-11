@@ -24,7 +24,6 @@ const buildGroup = (words: string[]) => {
 
   for (let word of words) {
     const hash = getWordHash(word)
-    console.log(hash)
 
     if (!group[hash]) {
       group[hash] = []
