@@ -38,6 +38,18 @@ export class SingleLikedList<T> {
       this.length -= 1
       return
     }
+
+    let current: SimpleLinkeListNode<T> | null = this.head
+
+    while (current?.getNext() != null) {
+      if (current?.getNext()?.equals(new SimpleLinkeListNode(value))) {
+        current.setNext(current.getNext()?.getNext() ?? null)
+        this.length -= 1
+        return
+      }
+
+      current = current.getNext()
+    }
   }
 
   isEmpty(): boolean {
