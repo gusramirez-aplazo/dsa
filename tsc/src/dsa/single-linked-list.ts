@@ -2,15 +2,10 @@ import { SimpleLinkeListNode } from './simple-linked-list-node'
 
 export class SingleLikedList<T> {
   private head: SimpleLinkeListNode<T> | null = null
-  private next: SimpleLinkeListNode<T> | null = null
   private length = 0
 
   getHead(): SimpleLinkeListNode<T> | null {
     return this.head
-  }
-
-  getNext(): SimpleLinkeListNode<T> | null {
-    return this.next
   }
 
   add(value: T): void {
@@ -18,11 +13,31 @@ export class SingleLikedList<T> {
 
     if (!this.head) {
       this.head = newNode
-    } else {
-      this.head.setNext(newNode)
+      this.length += 1
+      return
     }
 
+    let current: SimpleLinkeListNode<T> | null = this.head
+
+    while (current?.getNext() != null) {
+      current = current.getNext()
+    }
+
+    current?.setNext(newNode)
+
     this.length += 1
+  }
+
+  delete(value: T): void {
+    if (!this.head) {
+      return
+    }
+
+    if (this.head.equals(new SimpleLinkeListNode(value))) {
+      this.head = this.head.getNext()
+      this.length -= 1
+      return
+    }
   }
 
   isEmpty(): boolean {
